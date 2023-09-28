@@ -32,14 +32,6 @@ export default function Index({ auth }) {
       prices: 150.200
     }
   ]
-  const { data, setData, post, processing, reset, errors } = useForm({
-    message: '',
-  });
-
-  const submit = (e) => {
-    e.preventDefault();
-    post(route('chirps.store'), { onSuccess: () => reset() });
-  };
 
   return (
     <AuthenticatedLayout user={auth.user}>
@@ -57,7 +49,7 @@ export default function Index({ auth }) {
           <div class="conf-step__wrapper">
             <p class="conf-step__paragraph">Доступные залы:</p>
             <ul class="conf-step__list">
-              <CinemaHallName addNameHall={cinemaHalls} position={"vertical"}/>
+              <CinemaHallName addNameHall={cinemaHalls} position={"vertical"} />
             </ul>
             <button class="conf-step__button conf-step__button-accent">Создать зал</button>
           </div>
@@ -71,16 +63,12 @@ export default function Index({ auth }) {
         <div class="conf-step__wrapper">
           <p class="conf-step__paragraph">Выберите зал для конфигурации:</p>
           <ul class="conf-step__selectors-box">
-            <CinemaHallName addNameHall={cinemaHalls} position={"horizontal"}  onChange={handleChange}/>
-          </ul>          
-          <NumberOfSeats cinemaHalls={cinemaHalls} valueCinemaHall={value}/>
-          
-          
+            <CinemaHallName addNameHall={cinemaHalls} position={"horizontal"} onChange={handleChange} />
+          </ul>
+          {cinemaHalls.map((cinemaHall) =>
+            cinemaHall.id == value ? <NumberOfSeats cinemaHall={cinemaHall}/> : null)}
 
-          <fieldset class="conf-step__buttons text-center">
-            <button class="conf-step__button conf-step__button-regular">Отмена</button>
-            <input type="submit" value="Сохранить" class="conf-step__button conf-step__button-accent" />
-          </fieldset>
+
         </div>
       </section>
     </AuthenticatedLayout>
