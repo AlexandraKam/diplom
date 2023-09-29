@@ -17,6 +17,15 @@ function NumberOfSeats({ cinemaHall }) {
     }
   );
 
+  const [stateSize, setStateSize] = useState([cinemaHall.rows, cinemaHall.seats]);
+
+  const handleChangeSize = (event, name) => {
+    const stateSizeTMP = [...stateSize];
+    name === "rows" ? stateSizeTMP[0] = event.target.value : null;
+    name === "seats" ? stateSizeTMP[1] = event.target.value : null;
+    setStateSize(stateSizeTMP);
+  }
+
   const setSeatState = (row, seat, value) => {
     const stateTmp = [...state];
     stateTmp[row][seat] = value;
@@ -31,8 +40,9 @@ function NumberOfSeats({ cinemaHall }) {
     event.target.className === "conf-step__chair conf-step__chair_vip" ? setSeatState(row, seat, "conf-step__chair conf-step__chair_standart") : null;
   }
 
-  const onCancel = () => {
-    setState(
+  const onCancel = (event, name) => {
+    name === "size" ? setStateSize([cinemaHall.rows, cinemaHall.seats]) : null;
+    name === "scheme" ? setState(
       () => {
         const defaultstate = [[]];
         [...Array(cinemaHall.rows)].map((item, row) =>
@@ -44,18 +54,23 @@ function NumberOfSeats({ cinemaHall }) {
         )
         return defaultstate;
       }
-    )
+    ) : null;
   }
 
   return (
     <>
       <p class="conf-step__paragraph">Укажите количество рядов и максимальное количество кресел в ряду:</p>
       <div class="conf-step__legend">
-        <label class="conf-step__label">Рядов, шт<input type="number" class="conf-step__input" placeholder={cinemaHall.rows} /></label>
+        <label class="conf-step__label">Рядов, шт
+          <input type="number" class="conf-step__input" placeholder="0" value={stateSize[0]} onChange={(e) => handleChangeSize(e, "rows")} />
+        </label>
         <span class="multiplier">x</span>
-        <label class="conf-step__label">Мест, шт<input type="number" class="conf-step__input" placeholder={cinemaHall.seats} /></label>
+        <label class="conf-step__label">Мест, шт
+          <input type="number" class="conf-step__input" placeholder="0" value={stateSize[1]} onChange={(e) => handleChangeSize(e, "seats")} />
+        </label>
       </div>
       <fieldset class="conf-step__buttons text-center">
+        <button class="conf-step__button conf-step__button-regular" onClick={(e) => onCancel(e, "size")}>Отмена</button>
         <input type="submit" value="Сохранить" class="conf-step__button conf-step__button-accent" />
       </fieldset>
       <p class="conf-step__paragraph">Теперь вы можете указать типы кресел на схеме зала:</p>
@@ -77,7 +92,7 @@ function NumberOfSeats({ cinemaHall }) {
         </div>
       </div>
       <fieldset class="conf-step__buttons text-center">
-        <button class="conf-step__button conf-step__button-regular" onClick={onCancel}>Отмена</button>
+        <button class="conf-step__button conf-step__button-regular" onClick={(e) => onCancel(e, "scheme")}>Отмена</button>
         <input type="submit" value="Сохранить" class="conf-step__button conf-step__button-accent" />
       </fieldset>
     </>
