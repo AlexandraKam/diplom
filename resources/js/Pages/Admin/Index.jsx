@@ -5,15 +5,19 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { useForm, Head } from '@inertiajs/react';
 import CinemaHallName from '@/Components/CinemaHallName/CinemaHallName';
 import NumberOfSeats from '@/Components/NumberOfSeats/NumberOfSeats';
+import PricesHall from '@/Components/PricesHall/PricesHall';
 import { useState } from 'react';
 
 
 export default function Index({ auth }) {
 
-  const [value, setValue] = useState('')
+  const [valueChairs, setValueChairs] = useState('')
 
-  const handleChange = (value) => {
-    setValue(value)
+  const [valuePrices, setValuePrices] = useState('')
+
+  const handleChange = (value, name) => {
+    name === "chairs-hall" ? setValueChairs(value) : null;
+    name === "prices-hall" ? setValuePrices(value) : null;
   }
 
   const cinemaHalls = [
@@ -22,14 +26,16 @@ export default function Index({ auth }) {
       id: 111,
       rows: 10,
       seats: 8,
-      prices: 150.200
+      price: 100,
+      priceVIP: 200
     },
     {
       name: "Зал 2",
       id: 222,
       rows: 10,
       seats: 10,
-      prices: 150.200
+      price: 150,
+      priceVIP: 250
     }
   ]
 
@@ -63,12 +69,23 @@ export default function Index({ auth }) {
         <div class="conf-step__wrapper">
           <p class="conf-step__paragraph">Выберите зал для конфигурации:</p>
           <ul class="conf-step__selectors-box">
-            <CinemaHallName addNameHall={cinemaHalls} position={"horizontal"} onChange={handleChange} />
+            <CinemaHallName addNameHall={cinemaHalls} position={"horizontal"} name={"chairs-hall"} onChange={handleChange} />
           </ul>
           {cinemaHalls.map((cinemaHall) =>
-            cinemaHall.id == value ? <NumberOfSeats cinemaHall={cinemaHall}/> : null)}
-
-
+            cinemaHall.id == valueChairs ? <NumberOfSeats cinemaHall={cinemaHall} /> : null)}
+        </div>
+      </section>
+      <section class="conf-step">
+        <header class="conf-step__header conf-step__header_opened">
+          <h2 class="conf-step__title">Конфигурация цен</h2>
+        </header>
+        <div class="conf-step__wrapper">
+          <p class="conf-step__paragraph">Выберите зал для конфигурации:</p>
+          <ul class="conf-step__selectors-box">
+            <CinemaHallName addNameHall={cinemaHalls} position={"horizontal"} name={"prices-hall"} onChange={handleChange} />
+          </ul>
+          {cinemaHalls.map((cinemaHall) =>
+            cinemaHall.id == valuePrices ? <PricesHall cinemaHall={cinemaHall} /> : null)}
         </div>
       </section>
     </AuthenticatedLayout>
