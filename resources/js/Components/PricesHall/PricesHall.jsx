@@ -18,23 +18,23 @@ function PricesHall({ cinemaHall }) {
 
   return (
     <>
-      <p class="conf-step__paragraph">Установите цены для типов кресел:</p>
-      <div class="conf-step__legend">
-        <label class="conf-step__label">Цена, рублей
-          <input type="number" class="conf-step__input" placeholder="0" value={state[0]} onChange={(e) => handleChange(e, "standart")} />
+      <p className="conf-step__paragraph">Установите цены для типов кресел:</p>
+      <div className="conf-step__legend">
+        <label className="conf-step__label">Цена, рублей
+          <input type="number" className="conf-step__input" placeholder="0" value={state[0]} onChange={(e) => handleChange(e, "standart")} />
         </label>
-        за <span class="conf-step__chair conf-step__chair_standart"></span> обычные кресла
+        за <span className="conf-step__chair conf-step__chair_standart"></span> обычные кресла
       </div>
-      <div class="conf-step__legend">
-        <label class="conf-step__label">Цена, рублей
-          <input type="number" class="conf-step__input" placeholder="0" value={state[1]} onChange={(e) => handleChange(e, "vip")} />
+      <div className="conf-step__legend">
+        <label className="conf-step__label">Цена, рублей
+          <input type="number" className="conf-step__input" placeholder="0" value={state[1]} onChange={(e) => handleChange(e, "vip")} />
         </label>
-        за <span class="conf-step__chair conf-step__chair_vip"></span> VIP кресла
+        за <span className="conf-step__chair conf-step__chair_vip"></span> VIP кресла
       </div>
 
-      <fieldset class="conf-step__buttons text-center">
-        <button class="conf-step__button conf-step__button-regular" onClick={onCancel}>Отмена</button>
-        <input type="submit" value="Сохранить" class="conf-step__button conf-step__button-accent" />
+      <fieldset className="conf-step__buttons text-center">
+        <button className="conf-step__button conf-step__button-regular" onClick={onCancel}>Отмена</button>
+        <input type="submit" value="Сохранить" className="conf-step__button conf-step__button-accent" />
       </fieldset>
     </>
   )
