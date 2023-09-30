@@ -8,6 +8,7 @@ import NumberOfSeats from '@/Components/NumberOfSeats/NumberOfSeats';
 import PricesHall from '@/Components/PricesHall/PricesHall';
 import AddHall from '@/Components/AddHall/AddHall';
 import AddMovie from '@/Components/AddMovie/AddMovie';
+import Movies from '@/Components/Movies/Movies';
 import { useState } from 'react';
 
 
@@ -41,6 +42,36 @@ export default function Index({ auth }) {
     }
   ]
 
+  const movies = [
+    {
+      name: "Звёздные войны XXIII: Атака клонированных клонов",
+      id: 1001,
+      poster: "build/assets/i/poster.png",
+      duration: "130 минут",
+      synopsis: "Две сотни лет назад малороссийские хутора разоряла шайка нехристей-ляхов во главе с могущественным колдуном.",
+      origin: "США",
+      genre: "Фантастика"
+    },
+    {
+      name: "Альфа",
+      id: 1002,
+      poster: "build/assets/i/poster.png",
+      duration: "96 минут",
+      synopsis: "20 тысяч лет назад Земля была холодным и неуютным местом, в котором смерть подстерегала человека на каждом шагу.",
+      origin: "Франция",
+      genre: "Фантастика"
+    },
+    {
+      name: "Хищник",
+      id: 1003,
+      poster: "build/assets/i/poster.png",
+      duration: "101 минута",
+      synopsis: "Самые опасные хищники Вселенной, прибыв из глубин космоса, высаживаются на улицах маленького городка, чтобы начать свою кровавую охоту. Генетически модернизировав себя с помощью ДНК других видов, охотники стали ещё сильнее, умнее и беспощаднее.",
+      origin: "Канада, США",
+      genre: "Комедия"
+    }
+  ]
+
   return (
     <AuthenticatedLayout user={auth.user}>
       <Head title="Chirps" />
@@ -57,7 +88,7 @@ export default function Index({ auth }) {
           <div className="conf-step__wrapper">
             <p className="conf-step__paragraph">Доступные залы:</p>
             <ul className="conf-step__list">
-              <CinemaHallName addNameHall={cinemaHalls} position={"vertical"} onChange={handleChange}/>
+              <CinemaHallName addNameHall={cinemaHalls} position={"vertical"} onChange={handleChange} />
             </ul>
             <AddHall />
           </div>
@@ -97,39 +128,11 @@ export default function Index({ auth }) {
         </header>
         <div className="conf-step__wrapper">
           <AddMovie />
-          {/* <div className="conf-step__movies">
-            <div className="conf-step__movie">
-              <img className="conf-step__movie-poster" alt="poster" src="i/poster.png" />
-              <h3 className="conf-step__movie-title">Звёздные войны XXIII: Атака клонированных клонов</h3>
-              <p className="conf-step__movie-duration">130 минут</p>
-            </div>
-
-            <div className="conf-step__movie">
-              <img className="conf-step__movie-poster" alt="poster" src="i/poster.png" />
-              <h3 className="conf-step__movie-title">Миссия выполнима</h3>
-              <p className="conf-step__movie-duration">120 минут</p>
-            </div>
-
-            <div className="conf-step__movie">
-              <img className="conf-step__movie-poster" alt="poster" src="i/poster.png" />
-              <h3 className="conf-step__movie-title">Серая пантера</h3>
-              <p className="conf-step__movie-duration">90 минут</p>
-            </div>
-
-            <div className="conf-step__movie">
-              <img className="conf-step__movie-poster" alt="poster" src="i/poster.png" />
-              <h3 className="conf-step__movie-title">Движение вбок</h3>
-              <p className="conf-step__movie-duration">95 минут</p>
-            </div>
-
-            <div className="conf-step__movie">
-              <img className="conf-step__movie-poster" alt="poster" src="i/poster.png" />
-              <h3 className="conf-step__movie-title">Кот Да Винчи</h3>
-              <p className="conf-step__movie-duration">100 минут</p>
-            </div>
+          <div className="conf-step__movies">
+            <Movies movies={movies}/>
           </div>
 
-          <div className="conf-step__seances">
+          {/* <div className="conf-step__seances">
             <div className="conf-step__seances-hall">
               <h3 className="conf-step__seances-title">Зал 1</h3>
               <div className="conf-step__seances-timeline">

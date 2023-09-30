@@ -35,6 +35,26 @@ function AddMovie() {
                 Название фильма
                 <input className="conf-step__input" type="text" placeholder="Например, &laquo;Гражданин Кейн&raquo;" name="name" required />
               </label>
+              <label className="conf-step__label conf-step__label-fullsize" htmlFor="name">
+                Постер
+                <input className="conf-step__input" type="file" placeholder="Например, &laquo;Гражданин Кейн&raquo;" name="poster" required />
+              </label>
+              <label className="conf-step__label conf-step__label-fullsize" htmlFor="name">
+                Краткое описание
+                <input className="conf-step__input" type="text" placeholder="Например, Клара у Карла украла кораллы" name="synopsis" required />
+              </label>
+              <label className="conf-step__label conf-step__label-fullsize" htmlFor="name">
+                Продолжительность
+                <input className="conf-step__input" type="text" placeholder="Например, 100 минут" name="duration" required />
+              </label>
+              <label className="conf-step__label conf-step__label-fullsize" htmlFor="name">
+                Страна производства
+                <input className="conf-step__input" type="text" placeholder="Например, Индия" name="origin" required />
+              </label>
+              <label className="conf-step__label conf-step__label-fullsize" htmlFor="name">
+                Жанр
+                <input className="conf-step__input" type="text" placeholder="Например, триллер" name="genre" required />
+              </label>
               <div className="conf-step__buttons text-center">
                 <input type="submit" value="Добавить фильм" className="conf-step__button conf-step__button-accent" onClick={handleChange} />
                 <button className="conf-step__button conf-step__button-regular" onClick={closeModal}>Отменить</button>
