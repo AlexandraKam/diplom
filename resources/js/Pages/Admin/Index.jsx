@@ -7,7 +7,6 @@ import CinemaHallName from '@/Components/CinemaHallName/CinemaHallName';
 import NumberOfSeats from '@/Components/NumberOfSeats/NumberOfSeats';
 import PricesHall from '@/Components/PricesHall/PricesHall';
 import AddHall from '@/Components/AddHall/AddHall';
-import DeleteHall from '@/Components/DeleteHall/DeleteHall';
 import AddMovie from '@/Components/AddMovie/AddMovie';
 import { useState } from 'react';
 
@@ -58,7 +57,7 @@ export default function Index({ auth }) {
           <div className="conf-step__wrapper">
             <p className="conf-step__paragraph">Доступные залы:</p>
             <ul className="conf-step__list">
-              <CinemaHallName addNameHall={cinemaHalls} position={"vertical"} />
+              <CinemaHallName addNameHall={cinemaHalls} position={"vertical"} onChange={handleChange}/>
             </ul>
             <AddHall />
           </div>
