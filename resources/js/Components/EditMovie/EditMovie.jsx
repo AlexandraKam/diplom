@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Modal from 'react-modal';
+import DeleteMovie from "../DeleteMovie/DeleteMovie";
 import { useState } from "react";
 
 
@@ -17,6 +18,23 @@ function EditMovie({ movie, modalIsOpen, onCloseModal }) {
   useEffect(() => {
     setMovieEdit({ ...defaultMovie, ...movie });
   }, [movie])
+
+  const [modalIsOpenDelet, setModalIsOpenDelet] = useState(false);
+  const [movieValues, setMovieValues] = useState({});
+
+  const deleteMovie = (event, name) => {
+    onChange(event.target.value, name)
+  }
+
+  const openModal = (event, id, name) => {
+    const movieTMP = { id, name };
+    setModalIsOpenDelet(true);
+    setMovieValues(movieTMP);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   const handleChange = (event, value) => {
     const movieTMP = { ...movieEdit };
@@ -73,6 +91,7 @@ function EditMovie({ movie, modalIsOpen, onCloseModal }) {
               <div className="conf-step__buttons text-center">
                 <input type="submit" value="Сохранить" className="conf-step__button conf-step__button-accent" onClick={handleChange} />
                 <button className="conf-step__button conf-step__button-regular" onClick={onCloseModal}>Отменить</button>
+                <input type="submit" value="Удалить" className="conf-step__button conf-step__button-accent" onClick={(e) => openModal(e, movie.id, movie.name)} />
               </div>
             </form>
           </div>
@@ -86,6 +105,7 @@ function EditMovie({ movie, modalIsOpen, onCloseModal }) {
       <Modal isOpen={modalIsOpen} onRequestClose={onCloseModal} ariaHideApp={false}>
         {modalContent}
       </Modal>
+      < DeleteMovie id={movieValues.id} name={movieValues.name} modalIsOpenDelet={modalIsOpenDelet} onCloseModal={closeModal} />
     </div>
   )
 }
