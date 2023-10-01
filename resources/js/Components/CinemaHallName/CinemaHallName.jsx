@@ -3,7 +3,7 @@ import DeleteHall from "../DeleteHall/DeleteHall";
 import { useState } from "react";
 //import { v4 as uuidv4 } from 'uuid';
 
-function CinemaHallName({ addNameHall, position, name, onChange }) {
+function CinemaHallName({ cinemaHalls, position, name, onChange }) {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [cinemaHallValues, setCinemaHallValues] = useState({});
@@ -12,8 +12,8 @@ function CinemaHallName({ addNameHall, position, name, onChange }) {
     onChange(event.target.value, name)
   }
 
-  const openModal = (event, id, name) => {
-    const cinemaHallTMP = { id, name };
+  const openModal = (event, id, number) => {
+    const cinemaHallTMP = { id, number };
     setModalIsOpen(true);
     setCinemaHallValues(cinemaHallTMP);
   };
@@ -29,22 +29,22 @@ function CinemaHallName({ addNameHall, position, name, onChange }) {
   return (
     <>
       {position === "vertical" ?
-        addNameHall.map((cinemaHall, index) =>
-          <li key={index}>{cinemaHall.name}
-            <button className="conf-step__button conf-step__button-trash" onClick={(e) => openModal(e, cinemaHall.id, cinemaHall.name)}></button>
+        cinemaHalls.map((cinemaHall, index) =>
+          <li key={index}>Зал {cinemaHall.number}
+            <button className="conf-step__button conf-step__button-trash" onClick={(e) => openModal(e, cinemaHall.id, cinemaHall.number)}></button>
           </li>
         ) : name === "chairs-hall" ?
-          addNameHall.map((cinemaHall, index) =>
+        cinemaHalls.map((cinemaHall, index) =>
             <li key={index}><input type="radio" className="conf-step__radio" name="chairs-hall" value={cinemaHall.id} onChange={(e) => handleChange(e, name)} />
-              <span className="conf-step__selector">{cinemaHall.name}</span>
+              <span className="conf-step__selector">Зал {cinemaHall.number}</span>
             </li>
           ) :
-          addNameHall.map((cinemaHall, index) =>
+          cinemaHalls.map((cinemaHall, index) =>
             <li key={index}><input type="radio" className="conf-step__radio" name="prices-hall" value={cinemaHall.id} onChange={(e) => handleChange(e, name)} />
-              <span className="conf-step__selector">{cinemaHall.name}</span>
+              <span className="conf-step__selector">Зал {cinemaHall.number}</span>
             </li>
           )}
-      < DeleteHall id={cinemaHallValues.id} name={cinemaHallValues.name} modalIsOpen={modalIsOpen} onCloseModal={closeModal} />
+      < DeleteHall id={cinemaHallValues.id} number={cinemaHallValues.number} modalIsOpen={modalIsOpen} onCloseModal={closeModal} />
     </>
   )
 }

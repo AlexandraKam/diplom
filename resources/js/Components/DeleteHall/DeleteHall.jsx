@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from 'react-modal';
 
-function DeleteHall({ id, name, modalIsOpen, onCloseModal }) {
+function DeleteHall({ id, number, modalIsOpen, onCloseModal }) {
 
   // const [state, setState] = useState("");
 
@@ -22,7 +22,7 @@ function DeleteHall({ id, name, modalIsOpen, onCloseModal }) {
           </div>
           <div className="popup__wrapper">
             <form action="delete_hall" method="post" acceptCharset="utf-8">
-              <p className="conf-step__paragraph">Вы действительно хотите удалить <span></span>{name}</p>
+              <p className="conf-step__paragraph">Вы действительно хотите удалить зал <span></span>{number}</p>
               <div className="conf-step__buttons text-center">
                 <input type="submit" value="Удалить" className="conf-step__button conf-step__button-accent" onClick={(e) => handleChange(e, id)}/>
                 <button className="conf-step__button conf-step__button-regular" onClick={onCloseModal}>Отменить</button>

@@ -9,6 +9,7 @@ import PricesHall from '@/Components/PricesHall/PricesHall';
 import AddHall from '@/Components/AddHall/AddHall';
 import AddMovie from '@/Components/AddMovie/AddMovie';
 import Movies from '@/Components/Movies/Movies';
+import Seances from '@/Components/Seances/Seances';
 import { useState } from 'react';
 
 
@@ -25,7 +26,7 @@ export default function Index({ auth }) {
 
   const cinemaHalls = [
     {
-      name: "Зал 1",
+      number: 1,
       id: 111,
       rows: 10,
       seats: 8,
@@ -33,7 +34,7 @@ export default function Index({ auth }) {
       priceVIP: 200
     },
     {
-      name: "Зал 2",
+      number: 2,
       id: 222,
       rows: 10,
       seats: 10,
@@ -72,6 +73,69 @@ export default function Index({ auth }) {
     }
   ]
 
+  const seances = [
+    {
+      cinemaHall: {
+        number: 1,
+        id: 111
+      },
+      movie: {
+        name: "Звёздные войны XXIII: Атака клонированных клонов",
+        id: 1001,
+      },
+      start: "00:00",
+      opened: true
+    },
+    {
+      cinemaHall: {
+        number: 1,
+        id: 111
+      },
+      movie: {
+        name: "Звёздные войны XXIII: Атака клонированных клонов",
+        id: 1001
+      },
+      start: "12:00",
+      opened: true
+    },
+    {
+      cinemaHall: {
+        number: 1,
+        id: 111
+      },
+      movie: {
+        name: "Альфа",
+        id: 1002
+      },
+      start: "14:00",
+      opened: true
+    },
+    {
+      cinemaHall: {
+        number: 2,
+        id: 222
+      },
+      movie: {
+        name: "Альфа",
+        id: 1002
+      },
+      start: "19:50",
+      opened: true
+    },
+    {
+      cinemaHall: {
+        number: 2,
+        id: 222
+      },
+      movie: {
+        name: "Хищник",
+        id: 1003
+      },
+      start: "22:00",
+      opened: true
+    }
+  ]
+
   return (
     <AuthenticatedLayout user={auth.user}>
       <Head title="Chirps" />
@@ -88,7 +152,7 @@ export default function Index({ auth }) {
           <div className="conf-step__wrapper">
             <p className="conf-step__paragraph">Доступные залы:</p>
             <ul className="conf-step__list">
-              <CinemaHallName addNameHall={cinemaHalls} position={"vertical"} onChange={handleChange} />
+              <CinemaHallName cinemaHalls={cinemaHalls} position={"vertical"} onChange={handleChange} />
             </ul>
             <AddHall />
           </div>
@@ -102,7 +166,7 @@ export default function Index({ auth }) {
         <div className="conf-step__wrapper">
           <p className="conf-step__paragraph">Выберите зал для конфигурации:</p>
           <ul className="conf-step__selectors-box">
-            <CinemaHallName addNameHall={cinemaHalls} position={"horizontal"} name={"chairs-hall"} onChange={handleChange} />
+            <CinemaHallName cinemaHalls={cinemaHalls} position={"horizontal"} name={"chairs-hall"} onChange={handleChange} />
           </ul>
           {cinemaHalls.map((cinemaHall) =>
             cinemaHall.id == valueChairs ? <NumberOfSeats cinemaHall={cinemaHall} /> : null)}
@@ -115,7 +179,7 @@ export default function Index({ auth }) {
         <div className="conf-step__wrapper">
           <p className="conf-step__paragraph">Выберите зал для конфигурации:</p>
           <ul className="conf-step__selectors-box">
-            <CinemaHallName addNameHall={cinemaHalls} position={"horizontal"} name={"prices-hall"} onChange={handleChange} />
+            <CinemaHallName cinemaHalls={cinemaHalls} position={"horizontal"} name={"prices-hall"} onChange={handleChange} />
           </ul>
           {cinemaHalls.map((cinemaHall) =>
             cinemaHall.id == valuePrices ? <PricesHall cinemaHall={cinemaHall} /> : null)}
@@ -129,46 +193,15 @@ export default function Index({ auth }) {
         <div className="conf-step__wrapper">
           <AddMovie />
           <div className="conf-step__movies">
-            <Movies movies={movies}/>
+            <Movies movies={movies} />
           </div>
 
-          {/* <div className="conf-step__seances">
-            <div className="conf-step__seances-hall">
-              <h3 className="conf-step__seances-title">Зал 1</h3>
-              <div className="conf-step__seances-timeline">
-                <div className="conf-step__seances-movie" >
-                  <p className="conf-step__seances-movie-title">Миссия выполнима</p>
-                  <p className="conf-step__seances-movie-start">00:00</p>
-                </div>
-                <div className="conf-step__seances-movie" >
-                  <p className="conf-step__seances-movie-title">Миссия выполнима</p>
-                  <p className="conf-step__seances-movie-start">12:00</p>
-                </div>
-                <div className="conf-step__seances-movie" >
-                  <p className="conf-step__seances-movie-title">Звёздные войны XXIII: Атака клонированных клонов</p>
-                  <p className="conf-step__seances-movie-start">14:00</p>
-                </div>
-              </div>
-            </div>
-            <div className="conf-step__seances-hall">
-              <h3 className="conf-step__seances-title">Зал 2</h3>
-              <div className="conf-step__seances-timeline">
-                <div className="conf-step__seances-movie" >
-                  <p className="conf-step__seances-movie-title">Звёздные войны XXIII: Атака клонированных клонов</p>
-                  <p className="conf-step__seances-movie-start">19:50</p>
-                </div>
-                <div className="conf-step__seances-movie" >
-                  <p className="conf-step__seances-movie-title">Миссия выполнима</p>
-                  <p className="conf-step__seances-movie-start">22:00</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Seances seances={seances} />
 
           <fieldset className="conf-step__buttons text-center">
             <button className="conf-step__button conf-step__button-regular">Отмена</button>
             <input type="submit" value="Сохранить" className="conf-step__button conf-step__button-accent" />
-          </fieldset> */}
+          </fieldset>
         </div>
       </section>
 
