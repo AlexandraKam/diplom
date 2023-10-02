@@ -8,8 +8,9 @@ function CinemaHallName({ cinemaHalls, position, name, onChange }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [cinemaHallValues, setCinemaHallValues] = useState({});
 
-  const handleChange = (event, name) => {
-    onChange(event.target.value, name)
+  const handleChange = (event, name, cinemaHall) => {
+    onChange(event.target.value, name, cinemaHall)
+    // console.log(event.target.value, name, cinemaHall)
   }
 
   const openModal = (event, id, number) => {
@@ -34,16 +35,22 @@ function CinemaHallName({ cinemaHalls, position, name, onChange }) {
             <button className="conf-step__button conf-step__button-trash" onClick={(e) => openModal(e, cinemaHall.id, cinemaHall.number)}></button>
           </li>
         ) : name === "chairs-hall" ?
-        cinemaHalls.map((cinemaHall, index) =>
-            <li key={index}><input type="radio" className="conf-step__radio" name="chairs-hall" value={cinemaHall.id} onChange={(e) => handleChange(e, name)} />
-              <span className="conf-step__selector">Зал {cinemaHall.number}</span>
-            </li>
-          ) :
           cinemaHalls.map((cinemaHall, index) =>
-            <li key={index}><input type="radio" className="conf-step__radio" name="prices-hall" value={cinemaHall.id} onChange={(e) => handleChange(e, name)} />
+            <li key={index}><input type="radio" className="conf-step__radio" name="chairs-hall" value={cinemaHall.id} onChange={(e) => handleChange(e, name, cinemaHall)} />
               <span className="conf-step__selector">Зал {cinemaHall.number}</span>
             </li>
-          )}
+          ) : name === "prices-hall" ?
+            cinemaHalls.map((cinemaHall, index) =>
+              <li key={index}><input type="radio" className="conf-step__radio" name="prices-hall" value={cinemaHall.id} onChange={(e) => handleChange(e, name, cinemaHall)} />
+                <span className="conf-step__selector">Зал {cinemaHall.number}</span>
+              </li>
+            ) :
+            cinemaHalls.map((cinemaHall, index) =>
+              <li key={index}><input type="radio" className="conf-step__radio" name="open-sale" value={cinemaHall.id} onChange={(e) => handleChange(e, name, cinemaHall)} />
+                <span className="conf-step__selector">Зал {cinemaHall.number}</span>
+              </li>
+            )
+      }
       < DeleteHall id={cinemaHallValues.id} number={cinemaHallValues.number} modalIsOpen={modalIsOpen} onCloseModal={closeModal} />
     </>
   )

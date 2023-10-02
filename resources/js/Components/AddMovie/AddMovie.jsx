@@ -44,8 +44,8 @@ function AddMovie() {
                 <input className="conf-step__input" type="text" placeholder="Например, Клара у Карла украла кораллы" name="synopsis" required />
               </label>
               <label className="conf-step__label conf-step__label-fullsize" htmlFor="name">
-                Продолжительность
-                <input className="conf-step__input" type="text" placeholder="Например, 100 минут" name="duration" required />
+                Продолжительность в минутах
+                <input className="conf-step__input" type="number" placeholder="Например, 100" name="duration" required />
               </label>
               <label className="conf-step__label conf-step__label-fullsize" htmlFor="name">
                 Страна производства

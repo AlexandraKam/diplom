@@ -12,6 +12,8 @@ function PricesHall({ cinemaHall }) {
     setState(stateTMP);
   }
 
+  console.log(cinemaHall)
+
   const onCancel = () => {
     setState([cinemaHall.price, cinemaHall.priceVIP]);
   }

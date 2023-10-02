@@ -86,7 +86,7 @@ function NumberOfSeats({ cinemaHall }) {
           {[...Array(cinemaHall.rows)].map((item, row) =>
             <div className="conf-step__row">
               {[...Array(cinemaHall.seats)].map((item, seat) =>
-                <span key={row.data} data-row={row} data-seat={seat} className={state[row]?.[seat]} onClick={(e) => onChangeSeat(e, row, seat)}></span>
+                <span key={row.seat} data-row={row} data-seat={seat} className={state[row]?.[seat]} onClick={(e) => onChangeSeat(e, row, seat)}></span>
               )}
             </div>)}
         </div>

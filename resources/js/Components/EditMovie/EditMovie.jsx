@@ -22,9 +22,9 @@ function EditMovie({ movie, modalIsOpen, onCloseModal }) {
   const [modalIsOpenDelet, setModalIsOpenDelet] = useState(false);
   const [movieValues, setMovieValues] = useState({});
 
-  const deleteMovie = (event, name) => {
-    onChange(event.target.value, name)
-  }
+  // const deleteMovie = (event, name) => {
+  //   onChange(event.target.value, name)
+  // }
 
   const openModal = (event, id, name) => {
     const movieTMP = { id, name };
@@ -33,7 +33,7 @@ function EditMovie({ movie, modalIsOpen, onCloseModal }) {
   };
 
   const closeModal = () => {
-    setModalIsOpen(false);
+    setModalIsOpenDelet(false);
   };
 
   const handleChange = (event, value) => {
