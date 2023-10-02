@@ -11,7 +11,7 @@ import AddMovie from '@/Components/AddMovie/AddMovie';
 import Movies from '@/Components/Movies/Movies';
 import Seances from '@/Components/Seances/Seances';
 import AddSeance from '@/Components/AddSeance/AddSeance';
-import OpenSale from '@/Components/OpenSale/OpenSale';
+import OpenCloseSale from '@/Components/OpenCloseSale/openCloseSale';
 import { useState } from 'react';
 
 
@@ -26,7 +26,7 @@ export default function Index({ auth }) {
   const handleChange = (value, name, cinemaHall) => {
     name === "chairs-hall" ? setValueChairs(value) : null;
     name === "prices-hall" ? setValuePrices(value) : null;
-    name === "open-sale" ? setValueSale(cinemaHall) : null;
+    name === "open-sale" ? setValueSale(value) : null;
   }
 
   const openSale = (event, id) => {
@@ -162,7 +162,7 @@ export default function Index({ auth }) {
 
   return (
     <AuthenticatedLayout user={auth.user}>
-      <Head title="Chirps" />
+      <Head title="Cinema" />
 
       <header className="page-header">
         <h1 className="page-header__title">Идём<span>в</span>кино</h1>
@@ -181,7 +181,6 @@ export default function Index({ auth }) {
             <AddHall />
           </div>
         </section>
-
 
         <section className="conf-step">
           <header className="conf-step__header conf-step__header_opened">
@@ -242,10 +241,9 @@ export default function Index({ auth }) {
               <CinemaHallName cinemaHalls={cinemaHalls} position={"horizontal"} name={"open-sale"} onChange={handleChange} />
             </ul>
           </div>
-          {/* <OpenSale cinemaHall={valueSale}/> */}
-          <div className="conf-step__wrapper text-center">
-            <button className="conf-step__button conf-step__button-accent">Открыть продажу</button>
-          </div>
+          {cinemaHalls.map((cinemaHall) =>
+            cinemaHall.id == valueSale ? <OpenCloseSale cinemaHall={cinemaHall} /> : null)}
+          {/* <OpenSale cinemaHall={valueSale} /> */}
         </section>
       </main>
 
