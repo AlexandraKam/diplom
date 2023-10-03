@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+// import { v4 as uuidv4 } from 'uuid';
 
 function NumberOfSeats({ cinemaHall }) {
 
@@ -57,6 +58,10 @@ function NumberOfSeats({ cinemaHall }) {
     ) : null;
   }
 
+  // const generateUnicKey = () => {
+  //   return uuidv4();
+  // };
+
   return (
     <>
       <p className="conf-step__paragraph">Укажите количество рядов и максимальное количество кресел в ряду:</p>
@@ -84,9 +89,9 @@ function NumberOfSeats({ cinemaHall }) {
       <div className="conf-step__hall">
         <div className="conf-step__hall-wrapper">
           {[...Array(cinemaHall.rows)].map((item, row) =>
-            <div className="conf-step__row">
+            <div key={row} className="conf-step__row">
               {[...Array(cinemaHall.seats)].map((item, seat) =>
-                <span key={row.seat} data-row={row} data-seat={seat} className={state[row]?.[seat]} onClick={(e) => onChangeSeat(e, row, seat)}></span>
+                <span key={"" + row + seat} data-row={row} data-seat={seat} className={state[row]?.[seat]} onClick={(e) => onChangeSeat(e, row, seat)}></span>
               )}
             </div>)}
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import DeleteHall from "../DeleteHall/DeleteHall";
 import { useState } from "react";
-//import { v4 as uuidv4 } from 'uuid';
+
 
 function CinemaHallName({ cinemaHalls, position, name, onChange }) {
 
@@ -22,10 +22,6 @@ function CinemaHallName({ cinemaHalls, position, name, onChange }) {
   const closeModal = () => {
     setModalIsOpen(false);
   };
-
-  // const generateUnicKey = () => {
-  //   return uuidv4();
-  // };
 
   return (
     <>

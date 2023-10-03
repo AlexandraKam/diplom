@@ -192,7 +192,7 @@ export default function Index({ auth }) {
               <CinemaHallName cinemaHalls={cinemaHalls} position={"horizontal"} name={"chairs-hall"} onChange={handleChange} />
             </ul>
             {cinemaHalls.map((cinemaHall) =>
-              cinemaHall.id == valueChairs ? <NumberOfSeats cinemaHall={cinemaHall} /> : null)}
+              cinemaHall.id == valueChairs ? <NumberOfSeats key={cinemaHall.id} cinemaHall={cinemaHall} /> : null)}
           </div>
         </section>
         <section className="conf-step">
@@ -205,7 +205,7 @@ export default function Index({ auth }) {
               <CinemaHallName cinemaHalls={cinemaHalls} position={"horizontal"} name={"prices-hall"} onChange={handleChange} />
             </ul>
             {cinemaHalls.map((cinemaHall) =>
-              cinemaHall.id == valuePrices ? <PricesHall cinemaHall={cinemaHall} /> : null)}
+              cinemaHall.id == valuePrices ? <PricesHall key={cinemaHall.id} cinemaHall={cinemaHall} /> : null)}
           </div>
         </section>
 
@@ -215,6 +215,7 @@ export default function Index({ auth }) {
           </header>
           <div className="conf-step__wrapper">
             <AddMovie />
+            <p className="conf-step__paragraph">Выберите фильм для редактирования или удаления:</p>
             <div className="conf-step__movies">
               <Movies movies={movies} />
             </div>
@@ -242,7 +243,7 @@ export default function Index({ auth }) {
             </ul>
           </div>
           {cinemaHalls.map((cinemaHall) =>
-            cinemaHall.id == valueSale ? <OpenCloseSale cinemaHall={cinemaHall} /> : null)}
+            cinemaHall.id == valueSale ? <OpenCloseSale key={cinemaHall.id} cinemaHall={cinemaHall} /> : null)}
           {/* <OpenSale cinemaHall={valueSale} /> */}
         </section>
       </main>
