@@ -1,8 +1,11 @@
 import React from 'react';
 import NavDay from '@/Components/NavDay/NavDay';
 import SeancesClient from '@/Components/SeancesClient/SeancesClient';
+import { useState } from "react";
 
 export default function Index() {
+
+  const [valueDate, setValueDate] = useState("1")
 
   const seances = [
     {
@@ -138,7 +141,7 @@ export default function Index() {
   ]
   
   const viewSeances = (event) => {
-    console.log(event)
+    setValueDate(event);
   }
 
 
@@ -150,7 +153,7 @@ export default function Index() {
 
       <NavDay days={days} onChange={viewSeances} />
 
-      <SeancesClient seances={seances} />
+      {valueDate !== "" ? <SeancesClient seances={seances} /> : null}
     </>
   )
 }

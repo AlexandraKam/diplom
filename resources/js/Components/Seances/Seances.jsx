@@ -2,7 +2,7 @@ import React from "react";
 import DeleteSeance from "../DeleteSeance/DeleteSeance";
 import { useState } from "react";
 
-function Seances({ seances, cinemaHalls, movies }) {
+function Seances({ seances }) {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [seanceValues, setSeanceValues] = useState({});
@@ -41,7 +41,7 @@ function Seances({ seances, cinemaHalls, movies }) {
   return (
     <>
       <div className="conf-step__seances">
-      <p className="conf-step__paragraph">Выберите сеанс для удаления:</p>
+        <p className="conf-step__paragraph">Выберите сеанс для удаления:</p>
         {seancesHalls.map((seancesHall, index) =>
           <div key={index} className="conf-step__seances-hall">
             <h3 className="conf-step__seances-title">Зал {seancesHall.number}</h3>

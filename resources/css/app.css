@@ -815,6 +815,10 @@ body {
   font-weight: 700;
   transform: scale(1.1);
 }
+.page-nav__radio {
+  width: 14%;
+  
+}
 .page-nav .page-nav__day_weekend {
   color: #DE2121;
 }

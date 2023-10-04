@@ -32,17 +32,20 @@ function CinemaHallName({ cinemaHalls, position, name, onChange }) {
           </li>
         ) : name === "chairs-hall" ?
           cinemaHalls.map((cinemaHall, index) =>
-            <li key={index}><input type="radio" className="conf-step__radio" name="chairs-hall" value={cinemaHall.id} onChange={(e) => handleChange(e, name, cinemaHall)} />
+            <li key={index}>
+              <input type="radio" className="conf-step__radio" name="chairs-hall" value={cinemaHall.id} onChange={(e) => handleChange(e, name, cinemaHall)} />
               <span className="conf-step__selector">Зал {cinemaHall.number}</span>
             </li>
           ) : name === "prices-hall" ?
             cinemaHalls.map((cinemaHall, index) =>
-              <li key={index}><input type="radio" className="conf-step__radio" name="prices-hall" value={cinemaHall.id} onChange={(e) => handleChange(e, name, cinemaHall)} />
+              <li key={index}>
+                <input type="radio" className="conf-step__radio" name="prices-hall" value={cinemaHall.id} onChange={(e) => handleChange(e, name, cinemaHall)} />
                 <span className="conf-step__selector">Зал {cinemaHall.number}</span>
               </li>
             ) :
             cinemaHalls.map((cinemaHall, index) =>
-              <li key={index}><input type="radio" className="conf-step__radio" name="open-sale" value={cinemaHall.id} onChange={(e) => handleChange(e, name, cinemaHall)} />
+              <li key={index}>
+                <input type="radio" className="conf-step__radio" name="open-sale" value={cinemaHall.id} onChange={(e) => handleChange(e, name, cinemaHall)} />
                 <span className="conf-step__selector">Зал {cinemaHall.number}</span>
               </li>
             )

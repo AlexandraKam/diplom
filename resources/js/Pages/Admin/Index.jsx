@@ -228,7 +228,7 @@ export default function Index({ auth }) {
           </header>
           <div className="conf-step__wrapper">
             <AddSeance cinemaHalls={cinemaHalls} movies={movies} />
-            <Seances seances={seances} cinemaHalls={cinemaHalls} movies={movies} />
+            <Seances seances={seances} />
           </div>
         </section>
 
