@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/react";
 import React from "react";
 import { useState } from "react";
 
@@ -52,7 +53,10 @@ function SeancesClient({ seances }) {
               <ul className="movie-seances__list">
                 {seances.map((seance, indexS) =>
                   seancesHall.id === seance.cinemaHall.id && seancesMovie.id === seance.movie.id &&
-                  <li key={indexS} className="movie-seances__time-block"><a className="movie-seances__time" href="hall.html">{seance.start}</a></li>
+                  <li key={indexS} className="movie-seances__time-block">
+                    <Link className="movie-seances__time" href={`/hall/${seance.id}`}>{seance.start}</Link>
+                    {/* <a className="movie-seances__time" href="hall.html">{seance.start}</a> */}
+                  </li>
                 )}
               </ul>
             </div>

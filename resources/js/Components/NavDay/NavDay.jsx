@@ -4,14 +4,7 @@ import { useState } from "react";
 function NavDay({ days, onChange }) {
 
   const [valueChosen, setValueChosen] = useState(["page-nav__day_chosen", "", "", "", "", "", ""])
-// () => {
-//       const defaultstate = [[]];
-//       days.map((day, index) => 
-//       day.today === false && day.weekend === false ? defaultstate[index] = "page-nav__day"
-//       : day.today === true && day.weekend === false ? defaultstate[index] = "page-nav__day page-nav__day_today page-nav__day_chosen"
-//       : day.today === true && day.weekend === true ? defaultstate[index] = "page-nav__day page-nav__day_today page-nav__day_weekend page-nav__day_chosen"
-//       : defaultstate[index] = "page-nav__day page-nav__day_weekend")
-//     }
+
   const handleChangeDay = (event, index) => {
     let valueChosenTMP = [...valueChosen];
     valueChosenTMP = ["", "", "", "", "", "", ""];

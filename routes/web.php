@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('client', [ClientController::class, 'index']);
-
+Route::get('hall/{hall}', [ClientController::class, 'hall']);
 
 
 require __DIR__ . '/auth.php';
