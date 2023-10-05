@@ -27,4 +27,21 @@ class ClientController extends Controller
     ]);
   }
 
+  public function payment($payment): Response
+  {
+
+    return Inertia::render('Client/Payment', [
+      'payment' => $payment
+    ]);
+  }
+
+  public function ticket($ticket): Response
+  {
+
+    return Inertia::render('Client/Ticket', [
+      'ticket' => $ticket
+    ]);
+  }
+
+
 }

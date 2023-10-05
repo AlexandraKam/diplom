@@ -6,13 +6,14 @@ function SeancesClient({ seances }) {
 
   let seancesMovies = [];
   seances.forEach((element) => {
-    seancesMovies[element.movie.id] = element.movie;
+    element.cinemaHall.opened === true ?
+    seancesMovies[element.movie.id] = element.movie : null;
   });
 
   const cinemaHallsMovie = (movie) => {
     let seancesHalls = [];
     seances.forEach((seance) => {
-      seance.movie.id === movie.id ?
+      seance.movie.id === movie.id && seance.cinemaHall.opened === true ?
         seancesHalls[seance.cinemaHall.id] = seance.cinemaHall : null;
     });
     seancesHalls = seancesHalls.sort((a, b) => {
@@ -47,7 +48,6 @@ function SeancesClient({ seances }) {
             </div>
           </div>
           {cinemaHallsMovie(seancesMovie).map((seancesHall, indexH) =>
-
             <div key={indexH} className="movie-seances__hall">
               <h3 className="movie-seances__hall-title">Зал {seancesHall.number}</h3>
               <ul className="movie-seances__list">

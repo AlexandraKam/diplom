@@ -11,7 +11,8 @@ export default function Index() {
     {
       cinemaHall: {
         number: 1,
-        id: 111
+        id: 111,
+        opened: true
       },
       movie: {
         name: "Звёздные войны XXIII: Атака клонированных клонов",
@@ -28,7 +29,8 @@ export default function Index() {
     {
       cinemaHall: {
         number: 1,
-        id: 111
+        id: 111,
+        opened: true
       },
       movie: {
         name: "Звёздные войны XXIII: Атака клонированных клонов",
@@ -45,7 +47,8 @@ export default function Index() {
     {
       cinemaHall: {
         number: 1,
-        id: 111
+        id: 111,
+        opened: true
       },
       movie: {
         name: "Альфа",
@@ -62,7 +65,8 @@ export default function Index() {
     {
       cinemaHall: {
         number: 2,
-        id: 222
+        id: 222,
+        opened: true
       },
       movie: {
         name: "Альфа",
@@ -79,7 +83,8 @@ export default function Index() {
     {
       cinemaHall: {
         number: 2,
-        id: 222
+        id: 222,
+        opened: true
       },
       movie: {
         name: "Хищник",
@@ -139,7 +144,7 @@ export default function Index() {
       weekend: true
     }
   ]
-  
+
   const viewSeances = (event) => {
     setValueDate(event);
   }

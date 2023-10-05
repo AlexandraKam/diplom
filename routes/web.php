@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('client', [ClientController::class, 'index']);
 Route::get('hall/{hall}', [ClientController::class, 'hall']);
+Route::get('payment/{payment}', [ClientController::class, 'payment']);
+Route::get('ticket/{ticket}', [ClientController::class, 'ticket']);
 
 
 require __DIR__ . '/auth.php';

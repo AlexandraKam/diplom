@@ -36,9 +36,9 @@ function NumberOfSeats({ cinemaHall }) {
 
   const onChangeSeat = (event, row, seat) => {
 
-    event.target.classNameName === "conf-step__chair conf-step__chair_standart" ? setSeatState(row, seat, "conf-step__chair conf-step__chair_disabled") : null;
-    event.target.classNameName === "conf-step__chair conf-step__chair_disabled" ? setSeatState(row, seat, "conf-step__chair conf-step__chair_vip") : null;
-    event.target.classNameName === "conf-step__chair conf-step__chair_vip" ? setSeatState(row, seat, "conf-step__chair conf-step__chair_standart") : null;
+    event.target.className === "conf-step__chair conf-step__chair_standart" ? setSeatState(row, seat, "conf-step__chair conf-step__chair_disabled") : null;
+    event.target.className === "conf-step__chair conf-step__chair_disabled" ? setSeatState(row, seat, "conf-step__chair conf-step__chair_vip") : null;
+    event.target.className === "conf-step__chair conf-step__chair_vip" ? setSeatState(row, seat, "conf-step__chair conf-step__chair_standart") : null;
   }
 
   const onCancel = (event, name) => {
