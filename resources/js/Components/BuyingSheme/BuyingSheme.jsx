@@ -3,43 +3,24 @@ import { useState } from "react";
 
 export default function BuyingSheme({ seance, onChange }) {
 
-  const [state, setState] = useState(
-    () => {
-      const defaultstate = [[]];
-      [...Array(seance.cinemaHall.rows)].map((item, rowTMP) =>
-        [...Array(seance.cinemaHall.seats)].map((item, seatTMP) => {
-          seance.seats.map((seat, index) => {
-            defaultstate[rowTMP] = defaultstate[rowTMP] ?? []
-            seat.row === rowTMP && seat.seat === seatTMP ?
-              defaultstate[rowTMP][seatTMP] = seat.type : null
-          })
-        }
-        )
-      )
-      return defaultstate;
-    }
-  );
+  const [state, setState] = useState(seance.seats);
 
-  const setSeatState = (row, seat, value) => {
-    const stateTmp = [...state];
-    stateTmp[row][seat] = value;
-    setState(stateTmp);
-    onChange(stateTmp);
+  const onChangeSeat = (row, seat) => {
+    const chair = getChair(row, seat);
+    chair.selected = !chair.selected;
+    setState((prevState) => {
+      return prevState.map((item) => item.row === row && item.seat === seat ? chair : item)
+    })
+    onChange(state.filter(item => item.selected));
   }
 
-  const onChangeSeat = (event, row, seat) => {
-    const selectedTMP = (rowTMP, seatTMP) => {
-      let seanceSeat;
-      seance.seats.forEach((seat) => {
-        seat.row === rowTMP && seat.seat === seatTMP ?
-          seanceSeat = seat.type : null;
-      });
-      return seanceSeat;
-    }
+  const getChair = (row, seat) => {
+    return state.find((chair) => chair.row === row && chair.seat === seat)
+  }
 
-    event.target.className === "buying-scheme__chair buying-scheme__chair_standart" ? setSeatState(row, seat, "selected") : null;
-    event.target.className === "buying-scheme__chair buying-scheme__chair_selected" ? setSeatState(row, seat, selectedTMP(row, seat)) : null;
-    event.target.className === "buying-scheme__chair buying-scheme__chair_vip" ? setSeatState(row, seat, "selected") : null;
+  const getClass = (row, seat) => {
+    const chair = getChair(row, seat);
+    return !chair ? "disabled" : !chair.free ? "taken" : chair.selected ? "selected" : chair.type;
   }
 
   return (
@@ -47,9 +28,9 @@ export default function BuyingSheme({ seance, onChange }) {
       <div className="buying-scheme__wrapper">
         {[...Array(seance.cinemaHall.rows)].map((item, row) =>
           <div key={row} className="buying-scheme__row">
-            {[...Array(seance.cinemaHall.seats)].map((item, seat) =>
-              <span key={"" + row + seat} data-row={row} data-seat={seat} className={"buying-scheme__chair buying-scheme__chair_" + state[row]?.[seat]}
-                onClick={(e) => onChangeSeat(e, row, seat)}></span>
+            {[...Array(seance.cinemaHall.seatsRows)].map((item, seat) =>
+              <span key={"" + row + seat} data-row={row} data-seat={seat} className={"buying-scheme__chair buying-scheme__chair_" + getClass(row, seat)}
+                onClick={(e) => onChangeSeat(row, seat)}></span>
             )}
           </div>)}
       </div>

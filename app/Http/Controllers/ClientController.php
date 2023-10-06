@@ -27,11 +27,15 @@ class ClientController extends Controller
     ]);
   }
 
-  public function payment($payment): Response
+  public function payment(Request $request, $payment): Response
   {
+    if ($request->has('row')) {
+      $row = $request->input('row');
+    }
 
     return Inertia::render('Client/Payment', [
-      'payment' => $payment
+      'payment' => $payment,
+      'row' => $row
     ]);
   }
 
