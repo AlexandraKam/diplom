@@ -3,9 +3,7 @@ import React from 'react';
 
 export default function Payment() {
 
-  const { payment, row } = usePage().props;
-
-  console.log(payment, row)
+  const { payment, seatsId } = usePage().props;
 
   const seance = {
     cinemaHall: {
@@ -690,6 +688,15 @@ export default function Payment() {
     ]
   }
 
+  const chairs = seance.seats.filter((seat) => seatsId.split(",").includes(seat.id.toString()))
+
+  let cost = 0;
+  chairs.map((chair) => {
+    chair.type === "standart" ?
+      cost = cost + seance.cinemaHall.price
+      : cost = cost + seance.cinemaHall.priceVIP
+  })
+
   return (
     <>
       <header className="page-header">
@@ -705,12 +712,14 @@ export default function Payment() {
 
           <div className="ticket__info-wrapper">
             <p className="ticket__info">На фильм: <span className="ticket__details ticket__title">{seance.movie.name}</span></p>
-            <p className="ticket__info">Места: <span className="ticket__details ticket__chairs">ряд 2 место 6, ряд 2 место 7</span></p>
+            <p className="ticket__info">Места: <span className="ticket__details ticket__chairs">
+              {chairs.map((chair) => " ряд " + ++chair.row + " место " + chair.seat++).join()}</span></p>
             <p className="ticket__info">В зале: <span className="ticket__details ticket__hall">{seance.cinemaHall.number}</span></p>
             <p className="ticket__info">Начало сеанса: <span className="ticket__details ticket__start">{seance.start}</span></p>
-            <p className="ticket__info">Стоимость: <span className="ticket__details ticket__cost">600</span> рублей</p>
+            <p className="ticket__info">Стоимость: <span className="ticket__details ticket__cost">{cost}</span> рублей</p>
 
-            <Link className="acceptin-button" as="button" href={`/ticket/${payment}`}>Получить код бронирования</Link>
+            <Link className="acceptin-button" as="button"
+              href={`/ticket/${payment}?chairs=${chairs.map((chair) => " ряд " + ++chair.row + " место " + chair.seat++).join()}`}>Получить код бронирования</Link>
 
             <p className="ticket__hint">После оплаты билет будет доступен в этом окне, а также придёт вам на почту. Покажите QR-код нашему контроллёру у входа в зал.</p>
             <p className="ticket__hint">Приятного просмотра!</p>

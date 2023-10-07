@@ -2,9 +2,9 @@ import { usePage } from '@inertiajs/react';
 import React from 'react';
 
 export default function Ticket() {
-  const { ticket } = usePage().props;
+  const { ticket, chairs } = usePage().props;
 
-  console.log(ticket)
+  console.log(ticket, chairs)
 
   const seance = {
     cinemaHall: {
@@ -704,7 +704,7 @@ export default function Ticket() {
 
           <div className="ticket__info-wrapper">
             <p className="ticket__info">На фильм: <span className="ticket__details ticket__title">{seance.movie.name}</span></p>
-            <p className="ticket__info">Места: <span className="ticket__details ticket__chairs">ряд 2 место 6, ряд 2 место 7</span></p>
+            <p className="ticket__info">Места: <span className="ticket__details ticket__chairs">{chairs}</span></p>
             <p className="ticket__info">В зале: <span className="ticket__details ticket__hall">{seance.cinemaHall.number}</span></p>
             <p className="ticket__info">Начало сеанса: <span className="ticket__details ticket__start">{seance.start}</span></p>
 

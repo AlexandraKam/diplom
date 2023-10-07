@@ -29,21 +29,26 @@ class ClientController extends Controller
 
   public function payment(Request $request, $payment): Response
   {
-    if ($request->has('row')) {
-      $row = $request->input('row');
+    if ($request->has('seatsId')) {
+      $seatsId = $request->input('seatsId');
     }
 
     return Inertia::render('Client/Payment', [
       'payment' => $payment,
-      'row' => $row
+      'seatsId' => $seatsId
     ]);
   }
 
-  public function ticket($ticket): Response
+  public function ticket(Request $request, $ticket): Response
   {
 
+    if ($request->has('chairs')) {
+      $chairs = $request->input('chairs');
+    }
+
     return Inertia::render('Client/Ticket', [
-      'ticket' => $ticket
+      'ticket' => $ticket,
+      'chairs' => $chairs
     ]);
   }
 

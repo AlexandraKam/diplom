@@ -782,9 +782,9 @@ export default function Hall() {
   }
 
   const handleChange = (seats) => {
-   
-    console.log('seats', seats)
-    setStateSeat(seats)
+   const seatsId = seats.map((seat) => seat.id)
+    console.log('seats', seatsId)
+    setStateSeat(seatsId.join())
   }
 
   return (
@@ -798,7 +798,7 @@ export default function Hall() {
           </div>
         </div>
         <BuyingSheme key={hall} seance={seance} onChange={handleChange} />
-        <Link className="acceptin-button" as="button" href={`/payment/${hall}?row=${stateSeat[0]}`}>Забронировать</Link>
+        <Link className="acceptin-button" as="button" href={`/payment/${hall}?seatsId=${stateSeat}`}>Забронировать</Link>
       </section>
     </main>
   )
