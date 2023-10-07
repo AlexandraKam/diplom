@@ -7,11 +7,13 @@ export default function BuyingSheme({ seance, onChange }) {
 
   const onChangeSeat = (row, seat) => {
     const chair = getChair(row, seat);
-    chair.selected = !chair.selected;
-    setState((prevState) => {
-      return prevState.map((item) => item.row === row && item.seat === seat ? chair : item)
-    })
-    onChange(state.filter(item => item.selected));
+    if (chair.free) {
+      chair.selected = !chair.selected;
+      setState((prevState) => {
+        return prevState.map((item) => item.row === row && item.seat === seat ? chair : item)
+      })
+      onChange(state.filter(item => item.selected));
+    }
   }
 
   const getChair = (row, seat) => {

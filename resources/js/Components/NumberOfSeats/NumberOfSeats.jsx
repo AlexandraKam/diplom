@@ -4,58 +4,50 @@ import { useState } from "react";
 
 function NumberOfSeats({ cinemaHall }) {
 
-  const [state, setState] = useState(
-    () => {
-      const defaultstate = [[]];
-      [...Array(cinemaHall.rows)].map((item, row) =>
-        [...Array(cinemaHall.seats)].map((item, seat) => {
-          defaultstate[row] = defaultstate[row] ?? []
-          defaultstate[row][seat] = "conf-step__chair conf-step__chair_standart"
-        }
-        )
-      )
-      return defaultstate;
-    }
-  );
+  const [state, setState] = useState(!cinemaHall.seats ? [] : JSON.parse(JSON.stringify(cinemaHall.seats)));
 
-  const [stateSize, setStateSize] = useState([cinemaHall.rows, cinemaHall.seats]);
+  const [stateSize, setStateSize] = useState([cinemaHall.rows, cinemaHall.seatsRows]);
 
   const handleChangeSize = (event, name) => {
     const stateSizeTMP = [...stateSize];
     name === "rows" ? stateSizeTMP[0] = event.target.value : null;
-    name === "seats" ? stateSizeTMP[1] = event.target.value : null;
+    name === "seatsRows" ? stateSizeTMP[1] = event.target.value : null;
     setStateSize(stateSizeTMP);
   }
 
-  const setSeatState = (row, seat, value) => {
-    const stateTmp = [...state];
-    stateTmp[row][seat] = value;
-    setState(stateTmp);
+  const onChangeSeat = (row, seat) => {
+    const chair = getChair(row, seat);
+    if (chair) {
+      if (chair.type === "standart") {
+        chair.type = "vip";
+        setState((prevState) => prevState.map((item) => item.row === row && item.seat === seat ? chair : item))
+      } else if (chair.type === "vip") {
+        setState((prevState) => prevState.filter(item => item.row !== row || item.seat !== seat))
+      }
+    } else {
+      setState((prevState) => {
+        prevState.push({
+          row: row,
+          seat: seat,
+          type: "standart"
+        })
+        return [...prevState];
+      })
+    }
   }
 
+  const getChair = (row, seat) => {
+    return state.find((chair) => chair.row === row && chair.seat === seat)
+  }
 
-  const onChangeSeat = (event, row, seat) => {
-
-    event.target.className === "conf-step__chair conf-step__chair_standart" ? setSeatState(row, seat, "conf-step__chair conf-step__chair_disabled") : null;
-    event.target.className === "conf-step__chair conf-step__chair_disabled" ? setSeatState(row, seat, "conf-step__chair conf-step__chair_vip") : null;
-    event.target.className === "conf-step__chair conf-step__chair_vip" ? setSeatState(row, seat, "conf-step__chair conf-step__chair_standart") : null;
+  const getClass = (row, seat) => {
+    const chair = getChair(row, seat);
+    return !chair ? "disabled" : chair.type;
   }
 
   const onCancel = (event, name) => {
-    name === "size" ? setStateSize([cinemaHall.rows, cinemaHall.seats]) : null;
-    name === "scheme" ? setState(
-      () => {
-        const defaultstate = [[]];
-        [...Array(cinemaHall.rows)].map((item, row) =>
-          [...Array(cinemaHall.seats)].map((item, seat) => {
-            defaultstate[row] = defaultstate[row] ?? []
-            defaultstate[row][seat] = "conf-step__chair conf-step__chair_standart"
-          }
-          )
-        )
-        return defaultstate;
-      }
-    ) : null;
+    name === "size" ? setStateSize([cinemaHall.rows, cinemaHall.seatsRows]) : null;
+    name === "scheme" ? setState(!cinemaHall.seats ? [] : JSON.parse(JSON.stringify(cinemaHall.seats))) : null;
   }
 
   // const generateUnicKey = () => {
@@ -71,7 +63,7 @@ function NumberOfSeats({ cinemaHall }) {
         </label>
         <span className="multiplier">x</span>
         <label className="conf-step__label">Мест, шт
-          <input type="number" className="conf-step__input" placeholder="0" value={stateSize[1]} onChange={(e) => handleChangeSize(e, "seats")} />
+          <input type="number" className="conf-step__input" placeholder="0" value={stateSize[1]} onChange={(e) => handleChangeSize(e, "seatsRows")} />
         </label>
       </div>
       <fieldset className="conf-step__buttons text-center">
@@ -90,8 +82,9 @@ function NumberOfSeats({ cinemaHall }) {
         <div className="conf-step__hall-wrapper">
           {[...Array(cinemaHall.rows)].map((item, row) =>
             <div key={row} className="conf-step__row">
-              {[...Array(cinemaHall.seats)].map((item, seat) =>
-                <span key={"" + row + seat} data-row={row} data-seat={seat} className={state[row]?.[seat]} onClick={(e) => onChangeSeat(e, row, seat)}></span>
+              {[...Array(cinemaHall.seatsRows)].map((item, seat) =>
+                <span key={"" + row + seat} data-key={"" + row + seat} data-row={row} data-seat={seat} className={"conf-step__chair conf-step__chair_" + getClass(row, seat)}
+                  onClick={(e) => onChangeSeat(row, seat)}></span>
               )}
             </div>)}
         </div>
