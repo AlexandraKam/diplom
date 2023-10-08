@@ -1,16 +1,16 @@
 import React from "react";
 import Modal from 'react-modal';
 import { useState } from "react";
+import { router, useForm } from "@inertiajs/react";
 
 function AddHall() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   // const [state, setState] = useState("");
 
-  const handleChange = (event) => {
-    console.log(event)
-    // setState("");
-  }
+  const { data, setData, post, errors } = useForm({
+    number: ''
+  })
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -19,6 +19,11 @@ function AddHall() {
   const closeModal = () => {
     setModalIsOpen(false);
   };
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    post('/cinema-halls', { onSuccess: () => closeModal() });
+  }
 
   const modalContent = (
     <div className="popup">
@@ -30,13 +35,14 @@ function AddHall() {
             </h2>
           </div>
           <div className="popup__wrapper">
-            <form action="add_hall" method="post" acceptCharset="utf-8">
+            <form onSubmit={handleSubmit}>
               <label className="conf-step__label conf-step__label-fullsize" htmlFor="name">
                 Номер зала
-                <input className="conf-step__input" type="number" placeholder="Например, &laquo; 1&raquo;" required />
+                <input className="conf-step__input" type="number" placeholder="Например, &laquo; 1&raquo;" required onChange={e => setData('number', e.target.value)} />
               </label>
+              { errors.number && <span class="error">{ errors.number }</span> }
               <div className="conf-step__buttons text-center">
-                <input type="submit" value="Добавить зал" className="conf-step__button conf-step__button-accent" onClick={handleChange} />
+                <input type="submit" value="Добавить зал" className="conf-step__button conf-step__button-accent" />
                 <button className="conf-step__button conf-step__button-regular" onClick={closeModal}>Отменить</button>
               </div>
             </form>

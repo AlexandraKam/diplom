@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\CinemaHall;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,14 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cinema_halls', function (Blueprint $table) {
+        Schema::create('chairs', function (Blueprint $table) {
             $table->id();
-            $table->char('number', 5);
-            $table->integer('rows')->nullable();
-            $table->integer('seatsRow')->nullable();
-            $table->integer('price')->nullable();
-            $table->integer('priceVIP')->nullable();
-            $table->boolean('opened')->nullable();
+            $table->integer('row');
+            $table->integer('seat');
+            $table->enum('type', ['standart', 'vip'])->default('standart');
+            $table->boolean('free')->default(true);
+            $table->foreignIdFor(CinemaHall::class);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cinema_halls');
+        Schema::dropIfExists('chairs');
     }
 };

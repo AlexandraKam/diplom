@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CinemaHall extends Model
+class Chair extends Model
 {
   use HasFactory;
 
-  function chairs()
+  function cinemaHall()
   {
-    return $this->hasMany(Chair::class);
+    return $this->belongsTo(CinemaHall::class);
   }
 }
