@@ -16,7 +16,7 @@ import { useState } from 'react';
 
 
 export default function Index({ auth }) {
-  const { cinemaHalls } = usePage().props;
+  const { cinemaHalls, movies } = usePage().props;
   const [valueChairs, setValueChairs] = useState('')
 
   const [valuePrices, setValuePrices] = useState('')
@@ -32,39 +32,6 @@ export default function Index({ auth }) {
   const openSale = (event, id) => {
     console.log(event, id)
   }
-
-  const movies = [
-    {
-      name: "Звёздные войны XXIII: Атака клонированных клонов",
-      id: 1001,
-      poster: "build/assets/i/poster.png",
-      duration: 120,
-      synopsis: "Две сотни лет назад малороссийские хутора разоряла шайка нехристей-ляхов во главе с могущественным колдуном.",
-      origin: "США",
-      genre: "Фантастика",
-      backgroundColor: "#85ffd3"
-    },
-    {
-      name: "Альфа",
-      id: 1002,
-      poster: "build/assets/i/poster.png",
-      duration: 96,
-      synopsis: "20 тысяч лет назад Земля была холодным и неуютным местом, в котором смерть подстерегала человека на каждом шагу.",
-      origin: "Франция",
-      genre: "Фантастика",
-      backgroundColor: "#ff85fb"
-    },
-    {
-      name: "Хищник",
-      id: 1003,
-      poster: "build/assets/i/poster.png",
-      duration: 105,
-      synopsis: "Самые опасные хищники Вселенной, прибыв из глубин космоса, высаживаются на улицах маленького городка, чтобы начать свою кровавую охоту. Генетически модернизировав себя с помощью ДНК других видов, охотники стали ещё сильнее, умнее и беспощаднее.",
-      origin: "Канада, США",
-      genre: "Комедия",
-      backgroundColor: "#ba85ff"
-    }
-  ]
 
   const seances = [
     {

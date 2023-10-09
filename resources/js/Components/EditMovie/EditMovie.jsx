@@ -34,6 +34,7 @@ function EditMovie({ movie, modalIsOpen, onCloseModal }) {
 
   const closeModal = () => {
     setModalIsOpenDelet(false);
+    onCloseModal();
   };
 
   const handleChange = (event, value) => {

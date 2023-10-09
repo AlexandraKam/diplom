@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CinemaHall;
+use App\Models\Movie;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -14,7 +15,8 @@ class AdminController extends Controller
   public function index(): Response
   {
     return Inertia::render('Admin/Index', [
-      'cinemaHalls' => CinemaHall::orderBy('number')->with('chairs')->get()
+      'cinemaHalls' => CinemaHall::orderBy('number')->with('chairs')->get(),
+      'movies' => Movie::all()
     ]);
   }
 

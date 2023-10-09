@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChairController;
 use App\Http\Controllers\CinemaHallController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -38,10 +39,14 @@ Route::middleware('auth')->group(function () {
   Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
   Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+  
   Route::post('/cinema-halls', [CinemaHallController::class, 'store'])->name('cinemaHall.store');
   Route::delete('/cinema-halls/{hall}', [CinemaHallController::class, 'destroy'])->name('cinemaHall.destroy');
   Route::patch('/cinema-halls/{hall}', [CinemaHallController::class, 'update'])->name('cinemaHall.update');
   Route::post('/cinema-halls/{hall}/chairs', [CinemaHallController::class, 'createChairs'])->name('cinemaHall.createChairs');
+
+  Route::post('/movies', [MovieController::class, 'store'])->name('movie.store');
+  Route::delete('/movies/{movie}', [MovieController::class, 'destroy'])->name('movie.destroy');
 });
 
 Route::get('client', [ClientController::class, 'index']);

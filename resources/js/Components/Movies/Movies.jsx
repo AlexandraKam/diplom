@@ -20,7 +20,7 @@ function Movies({ movies }) {
   return (
     <>
       {movies.map((movie, index) =>
-        <div key={index} className="conf-step__movie" style={{backgroundColor: movie.backgroundColor}} onClick={(e) => openModal(e, movie)}>
+        <div key={index} className="conf-step__movie" onClick={(e) => openModal(e, movie)}>
           <img className="conf-step__movie-poster" alt="poster" src={movie.poster} />
           <h3 className="conf-step__movie-title">{movie.name}</h3>
           <p className="conf-step__movie-duration">{movie.duration} минут</p>
