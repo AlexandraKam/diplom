@@ -16,7 +16,7 @@ import { useState } from 'react';
 
 
 export default function Index({ auth }) {
-  const { cinemaHalls, movies } = usePage().props;
+  const { cinemaHalls, movies, seances } = usePage().props;
   const [valueChairs, setValueChairs] = useState('')
 
   const [valuePrices, setValuePrices] = useState('')
@@ -32,79 +32,6 @@ export default function Index({ auth }) {
   const openSale = (event, id) => {
     console.log(event, id)
   }
-
-  const seances = [
-    {
-      cinemaHall: {
-        number: 1,
-        id: 111
-      },
-      movie: {
-        name: "Звёздные войны XXIII: Атака клонированных клонов",
-        id: 1001,
-        duration: 120,
-        backgroundColor: "#85ffd3"
-      },
-      start: "00:00",
-      id: 2001
-    },
-    {
-      cinemaHall: {
-        number: 1,
-        id: 111
-      },
-      movie: {
-        name: "Звёздные войны XXIII: Атака клонированных клонов",
-        id: 1001,
-        duration: 120,
-        backgroundColor: "#85ffd3"
-      },
-      start: "12:00",
-      id: 2002
-    },
-    {
-      cinemaHall: {
-        number: 1,
-        id: 111
-      },
-      movie: {
-        name: "Альфа",
-        id: 1002,
-        duration: 96,
-        backgroundColor: "#ff85fb"
-      },
-      start: "14:00",
-      id: 2003
-    },
-    {
-      cinemaHall: {
-        number: 2,
-        id: 222
-      },
-      movie: {
-        name: "Альфа",
-        id: 1002,
-        duration: 96,
-        backgroundColor: "#ff85fb"
-      },
-      start: "19:50",
-      id: 2004
-    },
-    {
-      cinemaHall: {
-        number: 2,
-        id: 222
-      },
-      movie: {
-        name: "Хищник",
-        id: 1003,
-        duration: 105,
-        backgroundColor: "#ba85ff"
-      },
-      start: "22:00",
-      id: 2005
-    }
-  ]
 
   return (
     <AuthenticatedLayout user={auth.user}>

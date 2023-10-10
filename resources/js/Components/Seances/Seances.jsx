@@ -19,7 +19,7 @@ function Seances({ seances }) {
 
   let seancesHalls = [];
   seances.forEach((element) => {
-    seancesHalls[element.cinemaHall.id] = element.cinemaHall;
+    seancesHalls[element.cinema_hall.id] = element.cinema_hall;
   });
   seancesHalls = seancesHalls.sort((a, b) => {
     if (a.number > b.number) {
@@ -47,7 +47,7 @@ function Seances({ seances }) {
             <h3 className="conf-step__seances-title">Зал {seancesHall.number}</h3>
             <div className="conf-step__seances-timeline">
               {seances.map((seance, indexS) =>
-                seance.cinemaHall.id === seancesHall.id ?
+                seance.cinema_hall.id === seancesHall.id ?
                   <div key={indexS} className="conf-step__seances-movie" onClick={(e) => openModal(e, seance.id, seance.movie.name)}
                     style={{ width: (seance.movie.duration * 0.5) + "px", backgroundColor: seance.movie.backgroundColor, marginLeft: marginLeftSeance(seance.start) * 0.5 }}>
                     <p className="conf-step__seances-movie-title">{seance.movie.name}</p>

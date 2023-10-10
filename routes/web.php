@@ -6,6 +6,7 @@ use App\Http\Controllers\CinemaHallController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SeanceController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,6 +49,8 @@ Route::middleware('auth')->group(function () {
   Route::post('/movies', [MovieController::class, 'store'])->name('movie.store');
   Route::delete('/movies/{movie}', [MovieController::class, 'destroy'])->name('movie.destroy');
   Route::post('/movies/{movie}', [MovieController::class, 'update'])->name('movie.update');
+
+  Route::post('/seances', [SeanceController::class, 'store'])->name('seance.store');
 });
 
 Route::get('client', [ClientController::class, 'index']);
