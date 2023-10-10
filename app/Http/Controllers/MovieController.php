@@ -22,7 +22,9 @@ class MovieController extends Controller
       'genre' => 'nullable|string',
     ]);
 
-    $posterFilePath = Storage::url($request->file('poster')->store('poster', 'public'));
+    if ($request->hasFile('poster')) {
+      $posterFilePath = Storage::url($request->file('poster')->store('poster', 'public'));
+    }
 
     $movie = new Movie;
 
@@ -54,7 +56,46 @@ class MovieController extends Controller
    */
   public function update(Request $request, Movie $movie)
   {
-    //
+    $data = $request->validate([
+      'name' => 'nullable|string',
+      'poster' => 'nullable|file|mimes:jpg,bmp,png|max:2048',
+      'duration' => 'integer|nullable',
+      'synopsis' => 'nullable|string',
+      'origin' => 'nullable|string',
+      'genre' => 'nullable|string',
+    ]);
+
+    error_log('test');
+    if($request->hasFile('poster'))
+    {
+      error_log('file exist');
+      $posterFilePath = Storage::url($request->file('poster')->store('poster', 'public'));
+      error_log($posterFilePath);
+      $movie->poster = $posterFilePath;
+    }
+
+    if (isset($data['name'])) {
+      $movie->name = $data['name'];
+    }
+    if (isset($data['duration'])) {
+      $movie->duration = $data['duration'];
+    }
+    if (isset($data['synopsis'])) {
+      $movie->synopsis = $data['synopsis'];
+    }
+    if (isset($data['origin'])) {
+      $movie->origin = $data['origin'];
+    }
+    if (isset($data['genre'])) {
+      $movie->genre = $data['genre'];
+    }
+    if (isset($posterFilePath)) {
+      $movie->poster = $posterFilePath;
+    }
+
+    $movie->save();
+
+    return to_route('admin.index');
   }
 
   /**

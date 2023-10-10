@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
 
   Route::post('/movies', [MovieController::class, 'store'])->name('movie.store');
   Route::delete('/movies/{movie}', [MovieController::class, 'destroy'])->name('movie.destroy');
+  Route::post('/movies/{movie}', [MovieController::class, 'update'])->name('movie.update');
 });
 
 Route::get('client', [ClientController::class, 'index']);
