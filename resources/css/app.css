@@ -48,6 +48,7 @@ button,
 .conf-step__header,
 select {
   cursor: pointer;
+  background-image: none
 }
 
 .text-center {
