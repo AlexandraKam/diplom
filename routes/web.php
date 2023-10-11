@@ -5,6 +5,7 @@ use App\Http\Controllers\ChairController;
 use App\Http\Controllers\CinemaHallController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SeanceController;
 use Illuminate\Foundation\Application;
@@ -54,9 +55,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('client', [ClientController::class, 'index']);
-Route::get('hall/{hall}', [ClientController::class, 'hall']);
-Route::get('payment/{payment}', [ClientController::class, 'payment']);
-Route::get('ticket/{ticket}', [ClientController::class, 'ticket']);
+Route::get('seance/{seanceId}', [ClientController::class, 'seance']);
+Route::post('orders/{seanceId}', [OrderController::class, 'store']);
+Route::get('orders/{order}', [OrderController::class, 'show'])->name('order.show');
 
 
 require __DIR__ . '/auth.php';

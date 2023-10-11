@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function BuyingSheme({ seance, onChange }) {
 
-  const [state, setState] = useState(seance.seats);
+  const [state, setState] = useState(seance.cinema_hall.chairs);
 
   const onChangeSeat = (row, seat) => {
     const chair = getChair(row, seat);
@@ -28,9 +28,9 @@ export default function BuyingSheme({ seance, onChange }) {
   return (
     <div className="buying-scheme">
       <div className="buying-scheme__wrapper">
-        {[...Array(seance.cinemaHall.rows)].map((item, row) =>
+        {[...Array(seance.cinema_hall.rows)].map((item, row) =>
           <div key={row} className="buying-scheme__row">
-            {[...Array(seance.cinemaHall.seatsRows)].map((item, seat) =>
+            {[...Array(seance.cinema_hall.seatsRow)].map((item, seat) =>
               <span key={"" + row + seat} data-row={row} data-seat={seat} className={"buying-scheme__chair buying-scheme__chair_" + getClass(row, seat)}
                 onClick={(e) => onChangeSeat(row, seat)}></span>
             )}
@@ -39,9 +39,9 @@ export default function BuyingSheme({ seance, onChange }) {
       <div className="buying-scheme__legend">
         <div className="col">
           <p className="buying-scheme__legend-price"><span className="buying-scheme__chair buying-scheme__chair_standart">
-          </span> Свободно (<span className="buying-scheme__legend-value">{seance.cinemaHall.price}</span>руб)</p>
+          </span> Свободно (<span className="buying-scheme__legend-value">{seance.cinema_hall.price}</span>руб)</p>
           <p className="buying-scheme__legend-price"><span className="buying-scheme__chair buying-scheme__chair_vip">
-          </span> Свободно VIP (<span className="buying-scheme__legend-value">{seance.cinemaHall.priceVIP}</span>руб)</p>
+          </span> Свободно VIP (<span className="buying-scheme__legend-value">{seance.cinema_hall.priceVIP}</span>руб)</p>
         </div>
         <div className="col">
           <p className="buying-scheme__legend-price"><span className="buying-scheme__chair buying-scheme__chair_taken"></span> Занято</p>

@@ -9,7 +9,8 @@ function AddHall() {
   // const [state, setState] = useState("");
 
   const { data, setData, post, errors } = useForm({
-    number: ''
+    number: '',
+    opened: false
   })
 
   const openModal = () => {
@@ -40,7 +41,7 @@ function AddHall() {
                 Номер зала
                 <input className="conf-step__input" type="number" placeholder="Например, &laquo; 1&raquo;" required onChange={e => setData('number', e.target.value)} />
               </label>
-              { errors.number && <span class="error">{ errors.number }</span> }
+              { errors.number && <span className="error">{ errors.number }</span> }
               <div className="conf-step__buttons text-center">
                 <input type="submit" value="Добавить зал" className="conf-step__button conf-step__button-accent" />
                 <button className="conf-step__button conf-step__button-regular" onClick={closeModal}>Отменить</button>

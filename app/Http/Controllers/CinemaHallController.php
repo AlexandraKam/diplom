@@ -19,6 +19,7 @@ class CinemaHallController extends Controller
     ]);
     $cinemaHall = new CinemaHall;
     $cinemaHall->number = $validated['number'];
+    $cinemaHall->opened = false;
     $cinemaHall->save();
 
     return to_route('admin.index');
@@ -33,7 +34,8 @@ class CinemaHallController extends Controller
       'rows' => 'numeric|min:1',
       'seatsRow' => 'numeric|min:1',
       'price' => 'numeric|min:0',
-      'priceVIP' => 'numeric|min:0'
+      'priceVIP' => 'numeric|min:0',
+      'opened' => 'nullable|boolean'
     ]);
 
     if(isset($data['number'])){
@@ -50,6 +52,9 @@ class CinemaHallController extends Controller
     }
     if(isset($data['priceVIP'])){
       $hall->priceVIP = $data['priceVIP'];
+    }
+    if(isset($data['opened'])){
+      $hall->opened = $data['opened'];
     }
 
     $hall->save();

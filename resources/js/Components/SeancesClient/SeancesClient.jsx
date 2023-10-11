@@ -3,18 +3,17 @@ import React from "react";
 import { useState } from "react";
 
 function SeancesClient({ seances }) {
-
-  let seancesMovies = [];
-  seances.forEach((element) => {
-    element.cinemaHall.opened === true ?
-    seancesMovies[element.movie.id] = element.movie : null;
-  });
+console.log('seances', seances);
+  let seancesMovies = seances.map(seance => seance.movie);
+  // seances.forEach((element) => {
+  //   element.cinema_hall.opened === true ?
+  //   seancesMovies[element.movie.id] = element.movie : null;
+  // });
 
   const cinemaHallsMovie = (movie) => {
     let seancesHalls = [];
     seances.forEach((seance) => {
-      seance.movie.id === movie.id && seance.cinemaHall.opened === true ?
-        seancesHalls[seance.cinemaHall.id] = seance.cinemaHall : null;
+      seance.movie.id === movie.id ? seancesHalls[seance.cinema_hall.id] = seance.cinema_hall : null;
     });
     seancesHalls = seancesHalls.sort((a, b) => {
       if (a.number > b.number) {
@@ -52,9 +51,9 @@ function SeancesClient({ seances }) {
               <h3 className="movie-seances__hall-title">Зал {seancesHall.number}</h3>
               <ul className="movie-seances__list">
                 {seances.map((seance, indexS) =>
-                  seancesHall.id === seance.cinemaHall.id && seancesMovie.id === seance.movie.id &&
+                  seancesHall.id === seance.cinema_hall.id && seancesMovie.id === seance.movie.id &&
                   <li key={indexS} className="movie-seances__time-block">
-                    <Link className="movie-seances__time" href={`/hall/${seance.id}`}>{seance.start}</Link>
+                    <Link className="movie-seances__time" href={`/seance/${seance.id}`}>{seance.start}</Link>
                     {/* <a className="movie-seances__time" href="hall.html">{seance.start}</a> */}
                   </li>
                 )}
