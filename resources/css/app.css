@@ -469,7 +469,6 @@ select {
   transform: scale(1.1);
   font-weight: 900;
   font-size: 1.4rem;
-  z-index: 10;
 }
 
 .conf-step__selectors-box .conf-step__radio:hover+.conf-step__selector {
