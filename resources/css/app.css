@@ -461,7 +461,6 @@ select {
   transition-property: background-color;
   transition-duration: .5s;
   transition-timing-function: ease;
-  z-index: 5;
 }
 
 .conf-step__selectors-box .conf-step__radio:checked+.conf-step__selector {
